@@ -9,6 +9,10 @@ public class CharacterManager {
     private Character _human; // * change to Human later on
     private Character _dog; // * change to dog
     private List<Character> _enemies; // * change to enemies
+
+    private Vector3 _movementDir = new Vector3();
+    private Vector3 _displacement = new Vector3();
+    private float _movementSpeed = 5F;
     
     // Properties //
     public Character SelectedCharacter
@@ -52,5 +56,37 @@ public class CharacterManager {
     public void ChangeSelectedCharacter()
     {
         SelectedCharacter = (SelectedCharacter == _human) ? _dog : _human;
+    }
+
+    public void UpdateCharacterLocations()
+    {
+        _movementDir = new Vector3();
+
+        if (Input.GetKey(KeyCode.UpArrow))
+        {
+            _movementDir.z = 1F;
+        }
+
+        else if (Input.GetKey(KeyCode.DownArrow))
+        {
+            _movementDir.z = -1F;
+        }
+
+        else _movementDir.z = 0F;
+
+        if (Input.GetKey(KeyCode.LeftArrow))
+        {
+            _movementDir.x = -1F;
+        }
+
+        else if (Input.GetKey(KeyCode.RightArrow))
+        {
+            _movementDir.x = 1F;
+        }
+
+        else _movementDir.x = 0F;
+
+        _displacement = _movementDir * _movementSpeed * Time.deltaTime;
+        SelectedCharacter.VisualCharacter.GetComponent<CharacterController>().Move(_displacement);
     }
 }

@@ -3,7 +3,6 @@ using System.Collections;
 
 public class Character
 {
-
     // Fields //
     private string _name;
     private int _HP;

@@ -50,6 +50,7 @@ public class GameManager : MonoBehaviour {
     void Update()
     {
         _cameraManager.UpdateCameraLocation();
+        _characterManager.UpdateCharacterLocations();
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -57,5 +58,7 @@ public class GameManager : MonoBehaviour {
             Debug.Log("Current selected character = " + _characterManager.SelectedCharacter.Name);
         }
     }
+
+    
 
 }
