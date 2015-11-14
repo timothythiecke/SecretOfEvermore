@@ -2,7 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class CharacterManager {
+public class CharacterManager
+{
 
     // Fields //
     private Character _selectedCharacter;
@@ -13,7 +14,7 @@ public class CharacterManager {
     private Vector3 _movementDir = new Vector3();
     private Vector3 _displacement = new Vector3();
     private float _movementSpeed = 5F;
-    
+
     // Properties //
     public Character SelectedCharacter
     {
@@ -60,6 +61,7 @@ public class CharacterManager {
 
     public void UpdateCharacterLocations()
     {
+        // Selected character displacement //
         _movementDir = new Vector3();
 
         if (Input.GetKey(KeyCode.UpArrow))
@@ -88,5 +90,13 @@ public class CharacterManager {
 
         _displacement = _movementDir * _movementSpeed * Time.deltaTime;
         SelectedCharacter.VisualCharacter.GetComponent<CharacterController>().Move(_displacement);
+
+        // Non selected character displacement //
+        Character slave = (_selectedCharacter == _human) ? _dog : _human;
+        Vector3 dir = _selectedCharacter.VisualCharacter.transform.position - slave.VisualCharacter.transform.position;
+
+        if (dir.sqrMagnitude > 9)
+            slave.VisualCharacter.GetComponent<CharacterController>().Move(dir.normalized * _movementSpeed * Time.deltaTime);
+
     }
 }
