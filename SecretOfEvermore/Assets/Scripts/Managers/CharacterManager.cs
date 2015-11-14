@@ -39,11 +39,18 @@ public class CharacterManager {
     // Ctor & Methods //
     public CharacterManager()
     {
-        _human = new Character(); // * human
-        _dog = new Character(); // * dog
+        _human = new Character("Bobby"); // * human
+        _dog = new Character("Billy"); // * dog
 
         _selectedCharacter = _human;
 
         _enemies = new List<Character>(); // enemy
+    }
+
+    // Toggle between the human and the dog
+    // If SelectCharacter == human then dog else human
+    public void ChangeSelectedCharacter()
+    {
+        SelectedCharacter = (SelectedCharacter == _human) ? _dog : _human;
     }
 }

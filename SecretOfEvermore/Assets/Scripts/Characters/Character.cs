@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Character {
+public class Character
+{
 
     // Fields //
     private string _name;
@@ -46,14 +47,19 @@ public class Character {
     public GameObject VisualCharacter
     {
         get { return _gameObject; }
-        private set { _gameObject = value; }
+        set 
+        {
+            if (VisualCharacter == null) _gameObject = value;
+        }
     }
 
     // Ctor & Methods //
-    public Character()
+    public Character(string name, int hp = 10, int mp = 10, int level = 1, int attack = 1)
     {
-        // Consider doing the load in gamemanager?
-        // Or a static field of character
-        VisualCharacter = Resources.Load("VisualCharacter") as GameObject;
+        Name = name;
+        HP = hp;
+        MP = mp;
+        Level = level;
+        Attack = attack;
     }
 }

@@ -8,15 +8,54 @@ public class GameManager : MonoBehaviour {
     // Holds inventory
     // Creates visual prefabs based on info from other managers (characters, HUD, ...)
 
-    private CharacterManager _characterManager;
+    // Fields //
+    public static GameManager Instance;
 
+    private CharacterManager _characterManager;
+    private CameraManager _cameraManager;
+    private Object _visualCharacterPrefab;
+
+
+    // Properties //
+    public CharacterManager CharacterManager
+    {
+        get { return _characterManager; }
+        private set { _characterManager = value; }
+    }
+
+    public CameraManager CameraManager
+    {
+        get { return _cameraManager; }
+        private set { _cameraManager = value; }
+    }
+
+
+    // Methods //
     void Start()
     {
-        _characterManager = new CharacterManager();
+        if (Instance == null) Instance = this;
 
-        Instantiate(_characterManager.Human.VisualCharacter, new Vector3(), new Quaternion());
-        Instantiate(_characterManager.Dog.VisualCharacter, new Vector3(0,10,0), new Quaternion());
+        _characterManager = new CharacterManager();
+        _cameraManager = new CameraManager(15F, 15F);
+
+        _visualCharacterPrefab = Resources.Load("VisualCharacter");
+
+        // Move to builder function
+        _characterManager.Human.VisualCharacter = Instantiate(_visualCharacterPrefab, new Vector3(-3, 1, 0), new Quaternion()) as GameObject;
+        _characterManager.Dog.VisualCharacter = Instantiate(_visualCharacterPrefab, new Vector3(0, 1, 0), new Quaternion()) as GameObject;
 
         // Do same for list enemies...
     }
+
+    void Update()
+    {
+        _cameraManager.UpdateCameraLocation();
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            _characterManager.ChangeSelectedCharacter();
+            Debug.Log("Current selected character = " + _characterManager.SelectedCharacter.Name);
+        }
+    }
+
 }
