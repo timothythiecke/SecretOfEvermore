@@ -59,8 +59,10 @@ public class CharacterManager
         SelectedCharacter = (SelectedCharacter == _human) ? _dog : _human;
     }
 
-    public void UpdateCharacterLocations()
+    public void CheckInput()
     {
+        if (Input.GetKeyDown(KeyCode.Space)) ChangeSelectedCharacter();
+       
         // Selected character displacement //
         _movementDir = new Vector3();
 

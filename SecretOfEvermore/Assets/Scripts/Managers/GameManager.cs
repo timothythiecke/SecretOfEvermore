@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using Assets.Scripts.Items;
+using Assets.Scripts.Managers;
 
 public class GameManager : MonoBehaviour {
 
@@ -14,6 +15,7 @@ public class GameManager : MonoBehaviour {
 
     private CharacterManager _characterManager;
     private CameraManager _cameraManager;
+    private UIManager _UIManager;
     private Object _visualCharacterPrefab;
     private Inventory _inventory;
 
@@ -31,6 +33,12 @@ public class GameManager : MonoBehaviour {
         private set { _cameraManager = value; }
     }
 
+    public UIManager UIManager
+    {
+        get { return _UIManager; }
+        private set { _UIManager = value; }
+    }
+
 
     // Methods //
     void Start()
@@ -39,28 +47,41 @@ public class GameManager : MonoBehaviour {
 
         _characterManager = new CharacterManager();
         _cameraManager = new CameraManager(15F, 15F);
+        _UIManager = new UIManager();
 
         _visualCharacterPrefab = Resources.Load("VisualCharacter");
 
-        // Move to builder function
-        _characterManager.Human.VisualCharacter = Instantiate(_visualCharacterPrefab, new Vector3(-3, 1, 0), new Quaternion()) as GameObject;
-        _characterManager.Dog.VisualCharacter = Instantiate(_visualCharacterPrefab, new Vector3(0, 1, 0), new Quaternion()) as GameObject;
-
-        // Do same for list enemies...
+        BuildCharacters();
+        BuildUI();
     }
 
     void Update()
     {
         _cameraManager.UpdateCameraLocation();
-        _characterManager.UpdateCharacterLocations();
-
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            _characterManager.ChangeSelectedCharacter();
-            Debug.Log("Current selected character = " + _characterManager.SelectedCharacter.Name);
-        }
+        _characterManager.CheckInput();
+        _UIManager.CheckInput();
     }
 
-    
+    private void BuildCharacters()
+    {
+        // Move to builder function
+        _characterManager.Human.VisualCharacter = Instantiate(_visualCharacterPrefab, new Vector3(-3, 1, 0), new Quaternion()) as GameObject;
+        _characterManager.Dog.VisualCharacter = Instantiate(_visualCharacterPrefab, new Vector3(0, 1, 0), new Quaternion()) as GameObject;
 
+        // Do same for list enemies...
+
+    }
+
+    private void BuildUI()
+    {
+        // Build panels from UIManager
+        Instantiate(Resources.Load("EvermorePanelPrefab") as GameObject);
+        var panelHook = GameObject.FindGameObjectWithTag("PanelHook").transform;
+
+        UIManager.CharacterPanel = Instantiate(Resources.Load("CharacterPanelPrefab") as GameObject);
+        UIManager.CharacterPanel.transform.SetParent(panelHook);
+        
+        UIManager.InventoryPanel = Instantiate(Resources.Load("InventoryPanelPrefab") as GameObject);
+        UIManager.InventoryPanel.transform.SetParent(panelHook);
+    }
 }
