@@ -46,6 +46,13 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\Characters\Character.cs" />
+     <Compile Include="Assets\Scripts\Items\Armor.cs" />
+     <Compile Include="Assets\Scripts\Items\Bow.cs" />
+     <Compile Include="Assets\Scripts\Items\Inventory.cs" />
+     <Compile Include="Assets\Scripts\Items\Item.cs" />
+     <Compile Include="Assets\Scripts\Items\Staff.cs" />
+     <Compile Include="Assets\Scripts\Items\Sword.cs" />
+     <Compile Include="Assets\Scripts\Items\Weapon.cs" />
      <Compile Include="Assets\Scripts\Managers\CameraManager.cs" />
      <Compile Include="Assets\Scripts\Managers\CharacterManager.cs" />
      <Compile Include="Assets\Scripts\Managers\GameManager.cs" />

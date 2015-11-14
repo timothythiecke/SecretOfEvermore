@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Assets.Scripts.Items;
 
 public class GameManager : MonoBehaviour {
 
@@ -14,6 +15,7 @@ public class GameManager : MonoBehaviour {
     private CharacterManager _characterManager;
     private CameraManager _cameraManager;
     private Object _visualCharacterPrefab;
+    private Inventory _inventory;
 
 
     // Properties //
