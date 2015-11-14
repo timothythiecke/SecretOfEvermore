@@ -4,17 +4,11 @@ using System.Collections.Generic;
 
 public class CharacterManager {
 
-    // Not mono
-    // 2 distinct characters (human and dog)
-    // list of enemies
-    // selected character
-
     // Fields //
     private Character _selectedCharacter;
-    private Character _human;
-    private Character _dog;
-
-    private List<Character> _enemies; // character or enemy? -> enemy
+    private Character _human; // * change to Human later on
+    private Character _dog; // * change to dog
+    private List<Character> _enemies; // * change to enemies
     
     // Properties //
     public Character SelectedCharacter
@@ -23,27 +17,33 @@ public class CharacterManager {
         private set { _selectedCharacter = value; }
     }
 
-    public Character Human
+    public Character Human // *
     {
         get { return _human; }
         private set { _human = value; }
     }
 
-    public Character Dog
+    public Character Dog // *
     {
         get { return _dog; }
         private set { _dog = value; }
+    }
+
+    public List<Character> Enemies // *
+    {
+        get { return _enemies; }
+        private set { _enemies = value; }
     }
 
 
     // Ctor & Methods //
     public CharacterManager()
     {
-        _human = new Character();
-        _dog = new Character();
+        _human = new Character(); // * human
+        _dog = new Character(); // * dog
 
         _selectedCharacter = _human;
 
-        _enemies = new List<Character>();
+        _enemies = new List<Character>(); // enemy
     }
 }

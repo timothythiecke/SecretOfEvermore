@@ -3,11 +3,10 @@ using System.Collections;
 
 public class GameManager : MonoBehaviour {
 
-	// Inherits from Mono
     // Creates other Managers
     // Holds static info
     // Holds inventory
-    // Creates visual prefabs based on info from other managers
+    // Creates visual prefabs based on info from other managers (characters, HUD, ...)
 
     private CharacterManager _characterManager;
 
@@ -15,11 +14,9 @@ public class GameManager : MonoBehaviour {
     {
         _characterManager = new CharacterManager();
 
-        // Build visual prefabs based on info from other managers
-        // Deze klasse gaat de prefabs maken aan de hand van de info uit charactermanager
-        // Instantiate
+        Instantiate(_characterManager.Human.VisualCharacter, new Vector3(), new Quaternion());
+        Instantiate(_characterManager.Dog.VisualCharacter, new Vector3(0,10,0), new Quaternion());
 
-        Instantiate(Resources.Load("VisualCharacter"), new Vector3(), new Quaternion());
-        
+        // Do same for list enemies...
     }
 }
