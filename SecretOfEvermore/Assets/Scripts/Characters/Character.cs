@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Assets.Scripts.Items;
 
 public class Character
 {
@@ -7,7 +8,7 @@ public class Character
     private string _name;
     private int _HP;
     private int _MP;
-    //private Weapon _weapon;
+    private Weapon _weapon;
     private int _level;
     private int _attack;
     private GameObject _gameObject;
@@ -60,5 +61,10 @@ public class Character
         MP = mp;
         Level = level;
         Attack = attack;
+    }
+
+    public Inventory GetInventory()
+    {
+        return GameManager.Instance.Inventory;
     }
 }

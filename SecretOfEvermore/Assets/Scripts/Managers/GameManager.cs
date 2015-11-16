@@ -39,6 +39,12 @@ public class GameManager : MonoBehaviour {
         private set { _UIManager = value; }
     }
 
+    public Inventory Inventory
+    {
+        get { return _inventory; }
+        private set { _inventory = value; }
+    }
+
 
     // Methods //
     void Start()
@@ -53,6 +59,7 @@ public class GameManager : MonoBehaviour {
 
         BuildCharacters();
         BuildUI();
+        _UIManager.InitializePanels();
     }
 
     void Update()

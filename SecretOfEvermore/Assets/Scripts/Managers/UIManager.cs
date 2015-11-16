@@ -37,22 +37,26 @@ namespace Assets.Scripts.Managers
             
         }
 
+        public void InitializePanels()
+        {
+            _invPan.GetComponent<InventoryPanel>().Initialize();
+            _charPan.GetComponent<CharacterPanel>().Initialize();
+        }
+
         public void CheckInput()
         {
+            // Enable / disable panels
             if (Input.GetKeyDown(KeyCode.I))
             {
-                // Enable disable inventory panel
                 _invPan.SetActive(!_invPan.activeSelf);
+                _invPan.GetComponent<InventoryPanel>().Refresh();
             }
 
             if (Input.GetKeyDown(KeyCode.C))
             {
-                // Enable disable character panel
-
                 _charPan.SetActive(!_charPan.activeSelf);
+                _charPan.GetComponent<CharacterPanel>().Refresh();
             }
-
-            
         }
     }
 }
