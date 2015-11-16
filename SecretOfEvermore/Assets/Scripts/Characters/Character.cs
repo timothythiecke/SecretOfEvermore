@@ -10,7 +10,16 @@ public class Character
     //private Weapon _weapon;
     private int _level;
     private int _attack;
-    private GameObject _gameObject;
+    //private GameObject _gameObject; <= NOT ALLOWED, visual knows Logic, Logic doesn't know visual
+
+    /*
+    
+VisualCharacter <= THIS needs to be a class on it's own, not property of logic
+- mono
+- member of Character (link from UI to logic)
+- single model (cube or capsule)
+
+    */
 
     // Properties //
     public string Name
@@ -42,7 +51,7 @@ public class Character
         get { return _attack; }
         private set { _attack = value; }
     }
-
+    /*
     public GameObject VisualCharacter
     {
         get { return _gameObject; }
@@ -51,6 +60,7 @@ public class Character
             if (VisualCharacter == null) _gameObject = value;
         }
     }
+    /**/
 
     // Ctor & Methods //
     public Character(string name, int hp = 10, int mp = 10, int level = 1, int attack = 1)

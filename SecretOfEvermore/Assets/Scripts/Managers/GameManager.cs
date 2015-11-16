@@ -43,8 +43,8 @@ public class GameManager : MonoBehaviour {
         _visualCharacterPrefab = Resources.Load("VisualCharacter");
 
         // Move to builder function
-        _characterManager.Human.VisualCharacter = Instantiate(_visualCharacterPrefab, new Vector3(-3, 1, 0), new Quaternion()) as GameObject;
-        _characterManager.Dog.VisualCharacter = Instantiate(_visualCharacterPrefab, new Vector3(0, 1, 0), new Quaternion()) as GameObject;
+        //_characterManager.Human.VisualCharacter = Instantiate(_visualCharacterPrefab, new Vector3(-3, 1, 0), new Quaternion()) as GameObject;
+        //_characterManager.Dog.VisualCharacter = Instantiate(_visualCharacterPrefab, new Vector3(0, 1, 0), new Quaternion()) as GameObject;
 
         // Do same for list enemies...
     }

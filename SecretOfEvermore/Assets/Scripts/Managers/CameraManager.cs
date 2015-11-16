@@ -16,10 +16,10 @@ public class CameraManager {
 
     public void UpdateCameraLocation()
     { 
-        var charPos = GameManager.Instance.CharacterManager.SelectedCharacter.VisualCharacter.transform.position;
-        var lerpTarget = new Vector3(charPos.x, charPos.y + _yOffset, charPos.z - _zOffset);
+        //var charPos = GameManager.Instance.CharacterManager.SelectedCharacter.VisualCharacter.transform.position;
+        //var lerpTarget = new Vector3(charPos.x, charPos.y + _yOffset, charPos.z - _zOffset);
 
-        _main.transform.position = Vector3.Lerp(_main.transform.position, lerpTarget, 0.075f);
+        //_main.transform.position = Vector3.Lerp(_main.transform.position, lerpTarget, 0.075f);
     }
 }
 
