@@ -10,10 +10,6 @@ public class CharacterManager
     private Character _dog; // * change to dog
     private List<Character> _enemies; // * change to enemies
 
-    private Vector3 _movementDir = new Vector3();
-    private Vector3 _displacement = new Vector3();
-    private float _movementSpeed = 5F;
-
     // Properties //
     public Character SelectedCharacter
     {

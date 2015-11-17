@@ -65,15 +65,23 @@ public class GameManager : MonoBehaviour {
         BuildUI();
         _UIManager.InitializePanels();
 
+        _inventory.AddToInventory(new Staff());
+        _inventory.AddToInventory(new Sword());
+
         _visCharacters = new List<VisualCharacter>();
         _visCharacters.AddRange(GameObject.FindObjectsOfType<VisualCharacter>());
     }
 
     void Update()
     {
+        ////////////////////
+        // Input checkers //
         _cameraManager.UpdateCameraLocation();
         _characterManager.CheckInput();
         _UIManager.CheckInput();
+
+        if (Input.GetKeyDown(KeyCode.K)) _inventory.CycleWeaponDecremental();
+        if (Input.GetKeyDown(KeyCode.L)) _inventory.CycleWeaponIncremental();
     }
 
     private void BuildCharacters()
