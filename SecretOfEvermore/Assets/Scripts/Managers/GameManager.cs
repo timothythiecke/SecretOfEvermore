@@ -5,7 +5,8 @@ using Assets.Scripts.Items;
 using Assets.Scripts.Managers;
 using Assets.Scripts.Panels;
 
-public class GameManager : MonoBehaviour {
+public class GameManager : MonoBehaviour
+{
 
     // Creates other Managers
     // Holds static info
@@ -48,26 +49,36 @@ public class GameManager : MonoBehaviour {
     }
 
 
-
-
     // Methods //
     void Start()
     {
+        // Create static instance
         if (Instance == null) Instance = this;
 
+        // Create inventory, add additional stuff for debug testing
+        _inventory = new Inventory();
+        _inventory.AddToInventory(new Staff());
+        _inventory.AddToInventory(new Sword());
+        _inventory.AddToInventory(new Sword());
+        _inventory.AddToInventory(new Sword());
+        _inventory.AddToInventory(new Armor());
+        _inventory.AddToInventory(new Bow());
+
+        // Create managers
         _characterManager = new CharacterManager();
         _cameraManager = new CameraManager(15F, 15F);
         _UIManager = new UIManager();
 
+        // Load prefabs from memory
         _visualCharacterPrefab = Resources.Load("VisualCharacter");
 
+        // Builders
         BuildCharacters();
         BuildUI();
         _UIManager.InitializePanels();
+        _UIManager.DisablePanels();
 
-        _inventory.AddToInventory(new Staff());
-        _inventory.AddToInventory(new Sword());
-
+        // Fetch all visual characters from the scene
         _visCharacters = new List<VisualCharacter>();
         _visCharacters.AddRange(GameObject.FindObjectsOfType<VisualCharacter>());
     }
@@ -82,14 +93,11 @@ public class GameManager : MonoBehaviour {
 
         if (Input.GetKeyDown(KeyCode.K)) _inventory.CycleWeaponDecremental();
         if (Input.GetKeyDown(KeyCode.L)) _inventory.CycleWeaponIncremental();
+        ///////////////////
     }
 
     private void BuildCharacters()
     {
-        // Move to builder function
-        /*_characterManager.Human.VisChar = (Instantiate(_visualCharacterPrefab, new Vector3(-3, 1, 0), new Quaternion()) as GameObject).GetComponent<VisualCharacter>();
-        _characterManager.Dog.VisChar = (Instantiate(_visualCharacterPrefab, new Vector3(3, 1, 0), new Quaternion()) as GameObject).GetComponent<VisualCharacter>();*/
-
         (Instantiate(_visualCharacterPrefab, new Vector3(-3, 1, 0), new Quaternion()) as GameObject).GetComponent<VisualCharacter>().Character = _characterManager.Human;
         (Instantiate(_visualCharacterPrefab, new Vector3(1, 1, 0), new Quaternion()) as GameObject).GetComponent<VisualCharacter>().Character = _characterManager.Dog;
 
@@ -108,12 +116,12 @@ public class GameManager : MonoBehaviour {
 
         UIManager.CharacterPanel = Instantiate(Resources.Load("CharacterPanelPrefab") as GameObject).GetComponent<CharacterPanel>();
         UIManager.CharacterPanel.transform.SetParent(panelHook);
-        
+
         UIManager.InventoryPanel = Instantiate(Resources.Load("InventoryPanelPrefab") as GameObject).GetComponent<InventoryPanel>();
         UIManager.InventoryPanel.transform.SetParent(panelHook);
     }
 
-    
+
     public VisualCharacter FindVisualCharacter(Character character)
     {
         return _visCharacters.Find(x => x.Character.Equals(character));

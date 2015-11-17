@@ -43,6 +43,12 @@ namespace Assets.Scripts.Managers
             _charPan.Initialize();
         }
 
+        public void DisablePanels()
+        {
+            _invPan.gameObject.SetActive(false);
+            _charPan.gameObject.SetActive(false);
+        }
+
         public void CheckInput()
         {
             // Enable / disable panels

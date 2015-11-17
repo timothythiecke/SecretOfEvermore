@@ -62,6 +62,7 @@
      <Compile Include="Assets\Scripts\Panels\CharacterPanel.cs" />
      <Compile Include="Assets\Scripts\Panels\EvermorePanel.cs" />
      <Compile Include="Assets\Scripts\Panels\InventoryPanel.cs" />
+     <Compile Include="Assets\Scripts\Panels\InventoryPanelItem.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>E:/Unity5/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

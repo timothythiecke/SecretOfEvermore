@@ -26,7 +26,7 @@ namespace Assets.Scripts.Items
 
                 foreach (var item in _inventoryList)
                 {
-                    if (item.GetType().Equals(typeof(Weapon)))
+                    if (item is Weapon)
                     {
                         list.Add(item as Weapon);
                     }
@@ -46,7 +46,7 @@ namespace Assets.Scripts.Items
 
                 foreach (var item in _inventoryList)
                 {
-                    if (item.GetType().Equals(typeof(Armor)))
+                    if (item is Armor)
                     {
                         list.Add(item as Armor);
                     }
@@ -57,9 +57,17 @@ namespace Assets.Scripts.Items
             private set { _invArmor = value; }
         }
 
+		public List<Item> FullInventory
+		{
+			get { return _inventoryList;}
+			private set { _inventoryList = value;}
+		}
+
         public Inventory()
         {
             if (_inventoryList == null) _inventoryList = new List<Item>();
+            if (_invWeapon == null) _invWeapon = new List<Weapon>();
+            if (_invArmor == null) _invArmor = new List<Armor>();
             _currentWeaponIndex = 0;
         }
 
@@ -67,9 +75,13 @@ namespace Assets.Scripts.Items
         {
             // Multiple items added -> increase amount property of the item
 
-            var item = _inventoryList.Find(x => x.Equals(itemToAdd));
+            var item = _inventoryList.Find(x => x.GetType().Equals(itemToAdd.GetType()));
 
-            if (item == null) _inventoryList.Add(itemToAdd);
+            if (item == null) 
+			{
+				_inventoryList.Add (itemToAdd);
+				++itemToAdd.Amount;
+			}
             else ++item.Amount;
         }
 
@@ -91,9 +103,9 @@ namespace Assets.Scripts.Items
         public void CycleWeaponDecremental()
         {
             --_currentWeaponIndex;
-            if (_currentWeaponIndex < 0)
+            if ((_currentWeaponIndex < 0) && (InventoryWeapons.Count > 0))
             {
-                _currentWeaponIndex = 0;
+                _currentWeaponIndex = InventoryWeapons.Count - 1;
             }
 
             CurrentWeapon = InventoryWeapons[_currentWeaponIndex];
