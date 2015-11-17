@@ -4,7 +4,6 @@ using System.Collections.Generic;
 
 public class CharacterManager
 {
-
     // Fields //
     private Character _selectedCharacter;
     private Character _human; // * change to Human later on
@@ -47,7 +46,7 @@ public class CharacterManager
         _human = new Character("Bobby"); // * human
         _dog = new Character("Billy"); // * dog
 
-        _selectedCharacter = _human;
+        SelectedCharacter = _human;
 
         _enemies = new List<Character>(); // enemy
     }
@@ -62,46 +61,11 @@ public class CharacterManager
     public void CheckInput()
     {
         if (Input.GetKeyDown(KeyCode.Space)) ChangeSelectedCharacter();
-       
-        // Selected character displacement //
-        _movementDir = new Vector3();
 
-        if (Input.GetKey(KeyCode.UpArrow))
-        {
-            _movementDir.z = 1F;
-        }
+        // Character movements
+        SelectedCharacter.MoveByUserInput();
 
-        else if (Input.GetKey(KeyCode.DownArrow))
-        {
-            _movementDir.z = -1F;
-        }
-
-        else _movementDir.z = 0F;
-
-        if (Input.GetKey(KeyCode.LeftArrow))
-        {
-            _movementDir.x = -1F;
-        }
-
-        else if (Input.GetKey(KeyCode.RightArrow))
-        {
-            _movementDir.x = 1F;
-        }
-
-        else _movementDir.x = 0F;
-
-        _displacement = _movementDir * _movementSpeed * Time.deltaTime;
-
-        // logic -> in non mono so ok? reread article!
-        // place in Visual Character?
-        SelectedCharacter.VisChar.GetComponent<CharacterController>().Move(_displacement);
-
-        // Non selected character displacement //
         Character slave = (_selectedCharacter == _human) ? _dog : _human;
-        Vector3 dir = _selectedCharacter.VisChar.transform.position - slave.VisChar.transform.position;
-
-        if (dir.sqrMagnitude > 9)
-            slave.VisChar.GetComponent<CharacterController>().Move(dir.normalized * _movementSpeed * Time.deltaTime);
-
+        slave.SlaveMovement();
     }
 }

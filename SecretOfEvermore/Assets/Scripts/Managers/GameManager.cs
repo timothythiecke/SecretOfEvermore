@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using Assets.Scripts.Items;
 using Assets.Scripts.Managers;
 using Assets.Scripts.Panels;
@@ -19,7 +20,7 @@ public class GameManager : MonoBehaviour {
     private UIManager _UIManager;
     private Object _visualCharacterPrefab;
     private Inventory _inventory;
-
+    private List<VisualCharacter> _visCharacters;
 
     // Properties //
     public CharacterManager CharacterManager
@@ -47,6 +48,8 @@ public class GameManager : MonoBehaviour {
     }
 
 
+
+
     // Methods //
     void Start()
     {
@@ -61,6 +64,9 @@ public class GameManager : MonoBehaviour {
         BuildCharacters();
         BuildUI();
         _UIManager.InitializePanels();
+
+        _visCharacters = new List<VisualCharacter>();
+        _visCharacters.AddRange(GameObject.FindObjectsOfType<VisualCharacter>());
     }
 
     void Update()
@@ -73,8 +79,11 @@ public class GameManager : MonoBehaviour {
     private void BuildCharacters()
     {
         // Move to builder function
-        _characterManager.Human.VisChar = (Instantiate(_visualCharacterPrefab, new Vector3(-3, 1, 0), new Quaternion()) as GameObject).GetComponent<VisualCharacter>();
-        _characterManager.Dog.VisChar = (Instantiate(_visualCharacterPrefab, new Vector3(3, 1, 0), new Quaternion()) as GameObject).GetComponent<VisualCharacter>();
+        /*_characterManager.Human.VisChar = (Instantiate(_visualCharacterPrefab, new Vector3(-3, 1, 0), new Quaternion()) as GameObject).GetComponent<VisualCharacter>();
+        _characterManager.Dog.VisChar = (Instantiate(_visualCharacterPrefab, new Vector3(3, 1, 0), new Quaternion()) as GameObject).GetComponent<VisualCharacter>();*/
+
+        (Instantiate(_visualCharacterPrefab, new Vector3(-3, 1, 0), new Quaternion()) as GameObject).GetComponent<VisualCharacter>().Character = _characterManager.Human;
+        (Instantiate(_visualCharacterPrefab, new Vector3(1, 1, 0), new Quaternion()) as GameObject).GetComponent<VisualCharacter>().Character = _characterManager.Dog;
 
         // Do same for list enemies...
         /*foreach (var item in _characterManager.Enemies)
@@ -94,5 +103,16 @@ public class GameManager : MonoBehaviour {
         
         UIManager.InventoryPanel = Instantiate(Resources.Load("InventoryPanelPrefab") as GameObject).GetComponent<InventoryPanel>();
         UIManager.InventoryPanel.transform.SetParent(panelHook);
+    }
+
+    
+    public VisualCharacter FindVisualCharacter(Character character)
+    {
+        return _visCharacters.Find(x => x.Character.Equals(character));
+    }
+
+    public VisualCharacter FindMainCharacter()
+    {
+        return _visCharacters.Find(x => x.Character.Equals(CharacterManager.SelectedCharacter));
     }
 }
