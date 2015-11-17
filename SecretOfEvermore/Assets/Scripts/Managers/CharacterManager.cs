@@ -91,14 +91,17 @@ public class CharacterManager
         else _movementDir.x = 0F;
 
         _displacement = _movementDir * _movementSpeed * Time.deltaTime;
-        SelectedCharacter.VisualCharacter.GetComponent<CharacterController>().Move(_displacement);
+
+        // logic -> in non mono so ok? reread article!
+        // place in Visual Character?
+        SelectedCharacter.VisChar.GetComponent<CharacterController>().Move(_displacement);
 
         // Non selected character displacement //
         Character slave = (_selectedCharacter == _human) ? _dog : _human;
-        Vector3 dir = _selectedCharacter.VisualCharacter.transform.position - slave.VisualCharacter.transform.position;
+        Vector3 dir = _selectedCharacter.VisChar.transform.position - slave.VisChar.transform.position;
 
         if (dir.sqrMagnitude > 9)
-            slave.VisualCharacter.GetComponent<CharacterController>().Move(dir.normalized * _movementSpeed * Time.deltaTime);
+            slave.VisChar.GetComponent<CharacterController>().Move(dir.normalized * _movementSpeed * Time.deltaTime);
 
     }
 }

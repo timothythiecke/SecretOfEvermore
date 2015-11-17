@@ -2,6 +2,7 @@
 using System.Collections;
 using Assets.Scripts.Items;
 using Assets.Scripts.Managers;
+using Assets.Scripts.Panels;
 
 public class GameManager : MonoBehaviour {
 
@@ -72,11 +73,14 @@ public class GameManager : MonoBehaviour {
     private void BuildCharacters()
     {
         // Move to builder function
-        _characterManager.Human.VisualCharacter = Instantiate(_visualCharacterPrefab, new Vector3(-3, 1, 0), new Quaternion()) as GameObject;
-        _characterManager.Dog.VisualCharacter = Instantiate(_visualCharacterPrefab, new Vector3(0, 1, 0), new Quaternion()) as GameObject;
+        _characterManager.Human.VisChar = (Instantiate(_visualCharacterPrefab, new Vector3(-3, 1, 0), new Quaternion()) as GameObject).GetComponent<VisualCharacter>();
+        _characterManager.Dog.VisChar = (Instantiate(_visualCharacterPrefab, new Vector3(3, 1, 0), new Quaternion()) as GameObject).GetComponent<VisualCharacter>();
 
         // Do same for list enemies...
-
+        /*foreach (var item in _characterManager.Enemies)
+        {
+            
+        }*/
     }
 
     private void BuildUI()
@@ -85,10 +89,10 @@ public class GameManager : MonoBehaviour {
         Instantiate(Resources.Load("EvermorePanelPrefab") as GameObject);
         var panelHook = GameObject.FindGameObjectWithTag("PanelHook").transform;
 
-        UIManager.CharacterPanel = Instantiate(Resources.Load("CharacterPanelPrefab") as GameObject);
+        UIManager.CharacterPanel = Instantiate(Resources.Load("CharacterPanelPrefab") as GameObject).GetComponent<CharacterPanel>();
         UIManager.CharacterPanel.transform.SetParent(panelHook);
         
-        UIManager.InventoryPanel = Instantiate(Resources.Load("InventoryPanelPrefab") as GameObject);
+        UIManager.InventoryPanel = Instantiate(Resources.Load("InventoryPanelPrefab") as GameObject).GetComponent<InventoryPanel>();
         UIManager.InventoryPanel.transform.SetParent(panelHook);
     }
 }

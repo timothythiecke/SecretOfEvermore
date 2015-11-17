@@ -15,17 +15,17 @@ namespace Assets.Scripts.Managers
         // Initializes panels
 
         // Fields //
-        private GameObject _invPan;
-        private GameObject _charPan;
+        private InventoryPanel _invPan;
+        private CharacterPanel _charPan;
 
         // Properties //
-        public GameObject InventoryPanel
+        public InventoryPanel InventoryPanel
         {
             get { return _invPan; }
             set { _invPan = value; }
         }
 
-        public GameObject CharacterPanel
+        public CharacterPanel CharacterPanel
         {
             get { return _charPan; }
             set { _charPan = value; }
@@ -39,8 +39,8 @@ namespace Assets.Scripts.Managers
 
         public void InitializePanels()
         {
-            _invPan.GetComponent<InventoryPanel>().Initialize();
-            _charPan.GetComponent<CharacterPanel>().Initialize();
+            _invPan.Initialize();
+            _charPan.Initialize();
         }
 
         public void CheckInput()
@@ -48,13 +48,13 @@ namespace Assets.Scripts.Managers
             // Enable / disable panels
             if (Input.GetKeyDown(KeyCode.I))
             {
-                _invPan.SetActive(!_invPan.activeSelf);
+                _invPan.gameObject.SetActive(!_invPan.gameObject.activeSelf);
                 _invPan.GetComponent<InventoryPanel>().Refresh();
             }
 
             if (Input.GetKeyDown(KeyCode.C))
             {
-                _charPan.SetActive(!_charPan.activeSelf);
+                _charPan.gameObject.SetActive(!_charPan.gameObject.activeSelf);
                 _charPan.GetComponent<CharacterPanel>().Refresh();
             }
         }

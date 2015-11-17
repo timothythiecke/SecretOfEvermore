@@ -11,7 +11,7 @@ public class Character
     private Weapon _weapon;
     private int _level;
     private int _attack;
-    private GameObject _gameObject;
+    private VisualCharacter _visCharacter;
 
     // Properties //
     public string Name
@@ -44,13 +44,10 @@ public class Character
         private set { _attack = value; }
     }
 
-    public GameObject VisualCharacter
+    public VisualCharacter VisChar
     {
-        get { return _gameObject; }
-        set 
-        {
-            if (VisualCharacter == null) _gameObject = value;
-        }
+        get { return _visCharacter; }
+        set { _visCharacter = value; }
     }
 
     // Ctor & Methods //
@@ -61,10 +58,5 @@ public class Character
         MP = mp;
         Level = level;
         Attack = attack;
-    }
-
-    public Inventory GetInventory()
-    {
-        return GameManager.Instance.Inventory;
     }
 }
