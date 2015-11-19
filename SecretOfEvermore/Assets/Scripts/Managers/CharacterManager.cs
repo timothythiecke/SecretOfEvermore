@@ -58,6 +58,16 @@ public class CharacterManager
         SelectedCharacter = (SelectedCharacter == _human) ? _dog : _human;
     }
 
+    public Character GetOtherCharacter(Character previous)
+    {
+        if (previous == _human)
+        {
+            return _dog;
+        }
+
+        return _human;
+    }
+
     public void CheckInput()
     {
         if (Input.GetKeyDown(KeyCode.Space)) ChangeSelectedCharacter();

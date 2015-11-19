@@ -20,4 +20,9 @@ public class Armor : Item {
     }
 
     // * increases character defence
+
+    public override string ToString()
+    {
+        return "Armor";
+    }
 }

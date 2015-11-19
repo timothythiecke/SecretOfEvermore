@@ -58,6 +58,12 @@ public class Character
         private set { _movSpeed = value; }
     }
 
+    public Weapon Weapon
+    {
+        get { return _weapon; }
+        private set {_weapon = value;}
+    }
+
 
     // Ctor & Methods //
     public Character(string name, int hp = 10, int mp = 10, int level = 1, int attack = 1, int defence = 0, float movementSpeed = 5F)

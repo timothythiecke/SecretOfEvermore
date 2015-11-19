@@ -12,5 +12,10 @@ namespace Assets.Scripts.Items
             // Increase attack of player
             // Melee attack
         }
+
+        public override string ToString()
+        {
+            return "Sword";
+        }
     }
 }

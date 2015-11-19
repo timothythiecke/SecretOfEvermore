@@ -9,15 +9,33 @@ namespace Assets.Scripts.Panels
 {
     public class CharacterPanel : EvermorePanel
     {
+        private List<Text> _textPanels;
+        private Character _target;
+
         public override void Initialize()
         {
-            //Instantiate(Button)
-            base.Initialize();
+            _textPanels = new List<Text>();
+            _textPanels.AddRange(GetComponentsInChildren<Text>());
+
+            _target = GameManager.Instance.CharacterManager.SelectedCharacter;
         }
 
         public override void Refresh()
         {
-            base.Refresh();
+            _textPanels.Find(x => x.gameObject.name.Equals("TxtPlayerName")).text = _target.Name + ", the " + _target.GetType().ToString();
+            _textPanels.Find(x => x.gameObject.name.Equals("TxtHP")).text = "HP: " + _target.HP.ToString();
+            _textPanels.Find(x => x.gameObject.name.Equals("TxtMP")).text = "MP: " + _target.MP.ToString();
+            //_textPanels.Find(x => x.gameObject.name.Equals("TxtWeapon")).text = _target.Weapon.ToString();
+            _textPanels.Find(x => x.gameObject.name.Equals("TxtLevel")).text = "Level: " + _target.Level.ToString();
+            _textPanels.Find(x => x.gameObject.name.Equals("TxtATK")).text = "ATK: " + _target.Attack.ToString();
+            _textPanels.Find(x => x.gameObject.name.Equals("TxtDef")).text = "DEF: " + _target.Defence.ToString();
+            _textPanels.Find(x => x.gameObject.name.Equals("TxtMovSpeed")).text = "Movement speed: " + _target.MovementSpeed.ToString();        
+        }
+
+        public void SwitchPlayer()
+        {
+            _target = GameManager.Instance.CharacterManager.GetOtherCharacter(_target);
+            Refresh();
         }
     }
 }

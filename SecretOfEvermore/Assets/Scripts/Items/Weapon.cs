@@ -8,4 +8,8 @@ public abstract class Weapon : Item {
         
     }
 
+    public override string ToString()
+    {
+        return base.ToString();
+    }
 }

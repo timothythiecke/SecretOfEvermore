@@ -11,5 +11,10 @@ namespace Assets.Scripts.Items
         {
             // Heal player
         }
+
+        public override string ToString()
+        {
+            return "Staff";
+        }
     }
 }
