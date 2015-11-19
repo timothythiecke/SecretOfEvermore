@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
     private CharacterManager _characterManager;
     private CameraManager _cameraManager;
     private UIManager _UIManager;
+    private BulletManager _bulletManager;
     private Object _visualCharacterPrefab;
     private Inventory _inventory;
     private List<VisualCharacter> _visCharacters;
@@ -48,6 +49,12 @@ public class GameManager : MonoBehaviour
         private set { _inventory = value; }
     }
 
+    public BulletManager BulletManager
+    {
+        get { return _bulletManager; }
+        private set { _bulletManager = value; }
+    }
+
 
     // Methods //
     void Start()
@@ -63,6 +70,7 @@ public class GameManager : MonoBehaviour
         _characterManager = new CharacterManager();
         _cameraManager = new CameraManager(15F, 15F);
         _UIManager = new UIManager();
+        gameObject.AddComponent<BulletManager>();
 
         // Load prefabs from memory
         _visualCharacterPrefab = Resources.Load("VisualCharacter");

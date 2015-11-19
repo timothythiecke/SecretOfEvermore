@@ -12,11 +12,7 @@ namespace Assets.Scripts.Items
         {
             Debug.Log("Noscope!");
 
-			// Get forward vector,
-			// Notify gameManager that a bullet should be spawned
-			// If we 
-
-			// I need MonoBehaviour for this :/
+			//GameManager.Instance.BulletManager.Shoot()
         }
 
         public override string ToString()
