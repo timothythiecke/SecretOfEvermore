@@ -10,6 +10,10 @@ public class CharacterManager
     private Character _dog; // * change to dog
     private List<Character> _enemies; // * change to enemies
 
+    private Vector3 _movementDir;
+    private VisualCharacter _playerCharacter;
+    private VisualCharacter _dogCharacter;
+
     // Properties //
     public Character SelectedCharacter
     {
@@ -59,9 +63,15 @@ public class CharacterManager
         if (Input.GetKeyDown(KeyCode.Space)) ChangeSelectedCharacter();
 
         // Character movements
-        SelectedCharacter.MoveByUserInput();
+        _movementDir = SelectedCharacter.CalculateMoveDirection();
+        GameManager.Instance.FindVisualCharacter(SelectedCharacter).CharacterController.Move(_movementDir * SelectedCharacter.MovementSpeed * Time.deltaTime); // keep in private VisualCharacter field? -> bad
 
+        // Slave movement
         Character slave = (_selectedCharacter == _human) ? _dog : _human;
-        slave.SlaveMovement();
+        var slaveVisChar = GameManager.Instance.FindVisualCharacter(slave);
+        Vector3 dir = GameManager.Instance.FindMainCharacter().transform.position - slaveVisChar.transform.position;
+        if (dir.sqrMagnitude > 9)
+            slaveVisChar.CharacterController.Move(dir.normalized * slave.MovementSpeed * Time.deltaTime);
     }
+
 }

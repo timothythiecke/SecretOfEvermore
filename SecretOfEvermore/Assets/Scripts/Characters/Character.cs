@@ -71,10 +71,9 @@ public class Character
         MovementSpeed = movementSpeed;
     }
 
-    public void MoveByUserInput()
+    public Vector3 CalculateMoveDirection()
     {
-        // Selected character displacement //
-        Vector3 movementDir = new Vector3();
+        var movementDir = new Vector3();
 
         if (Input.GetKey(KeyCode.UpArrow))
         {
@@ -86,8 +85,6 @@ public class Character
             movementDir.z = -1F;
         }
 
-        else movementDir.z = 0F;
-
         if (Input.GetKey(KeyCode.LeftArrow))
         {
             movementDir.x = -1F;
@@ -98,18 +95,6 @@ public class Character
             movementDir.x = 1F;
         }
 
-        else movementDir.x = 0F;
-
-        GameManager.Instance.FindVisualCharacter(this).GetComponent<CharacterController>().Move(movementDir * MovementSpeed * Time.deltaTime);
+        return movementDir;
     }
-
-    public void SlaveMovement()
-    {
-        Vector3 dir = GameManager.Instance.FindMainCharacter().transform.position - GameManager.Instance.FindVisualCharacter(this).transform.position;
-
-        if (dir.sqrMagnitude > 9)
-            GameManager.Instance.FindVisualCharacter(this).GetComponent<CharacterController>().Move(dir.normalized * MovementSpeed * Time.deltaTime);
-    }
-
-
 }
