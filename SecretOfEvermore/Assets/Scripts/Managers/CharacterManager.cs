@@ -6,9 +6,9 @@ public class CharacterManager
 {
     // Fields //
     private Character _selectedCharacter;
-    private Character _human; // * change to Human later on
-    private Character _dog; // * change to dog
-    private List<Character> _enemies; // * change to enemies
+    private Human _human; // * change to Human later on
+    private Dog _dog; // * change to dog
+    private List<Enemy> _enemies; // * change to enemies
 
     private Vector3 _movementDir;
     private VisualCharacter _playerCharacter;
@@ -21,19 +21,19 @@ public class CharacterManager
         private set { _selectedCharacter = value; }
     }
 
-    public Character Human // *
+    public Human Human // *
     {
         get { return _human; }
         private set { _human = value; }
     }
 
-    public Character Dog // *
+    public Dog Dog // *
     {
         get { return _dog; }
         private set { _dog = value; }
     }
 
-    public List<Character> Enemies // *
+    public List<Enemy> Enemies // *
     {
         get { return _enemies; }
         private set { _enemies = value; }
@@ -43,19 +43,24 @@ public class CharacterManager
     // Ctor & Methods //
     public CharacterManager()
     {
-        _human = new Character("Bobby"); // * human
-        _dog = new Character("Billy"); // * dog
+        _human = new Human("Bobby"); // * human
+        _dog = new Dog("Billy"); // * dog
 
         SelectedCharacter = _human;
 
-        _enemies = new List<Character>(); // enemy
+        _enemies = new List<Enemy>(); // enemy
     }
 
     // Toggle between the human and the dog
     // If SelectCharacter == human then dog else human
     public void ChangeSelectedCharacter()
     {
-        SelectedCharacter = (SelectedCharacter == _human) ? _dog : _human;
+        if (SelectedCharacter == Human)
+        {
+            SelectedCharacter = Dog;
+        }
+
+        else SelectedCharacter = Human;
     }
 
     public Character GetOtherCharacter(Character previous)
@@ -78,7 +83,12 @@ public class CharacterManager
         GameManager.Instance.FindVisualCharacter(SelectedCharacter).CharacterController.Move(_movementDir * SelectedCharacter.MovementSpeed * Time.deltaTime); // keep in private VisualCharacter field? -> bad
 
         // Slave movement
-        Character slave = (_selectedCharacter == _human) ? _dog : _human;
+        Character slave;
+        if (SelectedCharacter == Human)
+        {
+            slave = Dog;
+        }
+        else slave = Human;
         var slaveVisChar = GameManager.Instance.FindVisualCharacter(slave);
         Vector3 dir = GameManager.Instance.FindMainCharacter().transform.position - slaveVisChar.transform.position;
         if (dir.sqrMagnitude > 9)

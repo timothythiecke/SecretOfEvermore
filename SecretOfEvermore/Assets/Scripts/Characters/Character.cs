@@ -2,7 +2,7 @@
 using System.Collections;
 using Assets.Scripts.Items;
 
-public class Character
+public abstract class Character
 {
     // Fields //
     private string _name;
