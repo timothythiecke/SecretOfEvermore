@@ -79,6 +79,11 @@ namespace Assets.Scripts.Items
 
             if (item == null) 
 			{
+                if ((_inventoryList.Count == 0) && (itemToAdd is Weapon))
+                {
+                    CurrentWeapon = itemToAdd as Weapon;
+                }
+   
 				_inventoryList.Add (itemToAdd);
 				++itemToAdd.Amount;
 			}
@@ -88,7 +93,7 @@ namespace Assets.Scripts.Items
         // Increment index
         // Check for out of bounds
         // Assign current weapon property to WeaponsInventory at location currentweaponindex
-        public void CycleWeaponIncremental()
+        public bool CycleWeaponIncremental()
         {
             ++_currentWeaponIndex;
             if (_currentWeaponIndex >= InventoryWeapons.Count)
@@ -97,10 +102,11 @@ namespace Assets.Scripts.Items
             }
 
             CurrentWeapon = InventoryWeapons[_currentWeaponIndex];
+            return true;
         }
 
         // Repeat in reverse order
-        public void CycleWeaponDecremental()
+        public bool CycleWeaponDecremental()
         {
             --_currentWeaponIndex;
             if ((_currentWeaponIndex < 0) && (InventoryWeapons.Count > 0))
@@ -109,6 +115,7 @@ namespace Assets.Scripts.Items
             }
 
             CurrentWeapon = InventoryWeapons[_currentWeaponIndex];
+            return true;
         }
     }
 }

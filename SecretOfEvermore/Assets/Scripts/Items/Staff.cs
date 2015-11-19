@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using UnityEngine;
 
 namespace Assets.Scripts.Items
 {
@@ -10,6 +11,7 @@ namespace Assets.Scripts.Items
         public override void PerformAction()
         {
             // Heal player
+            Debug.Log("Heal!");
         }
 
         public override string ToString()

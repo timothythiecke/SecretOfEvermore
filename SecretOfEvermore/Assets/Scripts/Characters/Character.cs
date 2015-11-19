@@ -103,4 +103,14 @@ public class Character
 
         return movementDir;
     }
+
+    public void UseWeapon()
+    {
+        if (Weapon != null) Weapon.PerformAction();
+    }
+
+    public void SetCurrentWeapon(Weapon current)
+    {
+        Weapon = current;
+    }
 }

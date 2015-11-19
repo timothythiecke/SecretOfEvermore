@@ -71,6 +71,7 @@ public class CharacterManager
     public void CheckInput()
     {
         if (Input.GetKeyDown(KeyCode.Space)) ChangeSelectedCharacter();
+        if (Input.GetKeyDown(KeyCode.F) && (SelectedCharacter == Human)) Human.UseWeapon();
 
         // Character movements
         _movementDir = SelectedCharacter.CalculateMoveDirection();

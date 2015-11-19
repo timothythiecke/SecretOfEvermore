@@ -57,13 +57,8 @@ public class GameManager : MonoBehaviour
 
         // Create inventory, add additional stuff for debug testing
         _inventory = new Inventory();
-        _inventory.AddToInventory(new Staff());
         _inventory.AddToInventory(new Sword());
-        _inventory.AddToInventory(new Sword());
-        _inventory.AddToInventory(new Sword());
-        _inventory.AddToInventory(new Armor());
-        _inventory.AddToInventory(new Bow());
-
+        
         // Create managers
         _characterManager = new CharacterManager();
         _cameraManager = new CameraManager(15F, 15F);
@@ -81,6 +76,10 @@ public class GameManager : MonoBehaviour
         // Fetch all visual characters from the scene
         _visCharacters = new List<VisualCharacter>();
         _visCharacters.AddRange(GameObject.FindObjectsOfType<VisualCharacter>());
+
+
+        // Other stuff
+        _characterManager.Human.SetCurrentWeapon(_inventory.CurrentWeapon);
     }
 
     void Update()
@@ -91,8 +90,20 @@ public class GameManager : MonoBehaviour
         _characterManager.CheckInput();
         _UIManager.CheckInput();
 
-        if (Input.GetKeyDown(KeyCode.K)) _inventory.CycleWeaponDecremental();
-        if (Input.GetKeyDown(KeyCode.L)) _inventory.CycleWeaponIncremental();
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            if (_inventory.CycleWeaponDecremental())
+            {
+                CharacterManager.Human.SetCurrentWeapon(_inventory.CurrentWeapon);
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            if (_inventory.CycleWeaponIncremental())
+            {
+                CharacterManager.Human.SetCurrentWeapon(_inventory.CurrentWeapon);
+            }
+        }
         ///////////////////
     }
 

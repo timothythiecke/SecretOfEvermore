@@ -15,8 +15,9 @@ namespace Assets.Scripts.Panels
         public override void Initialize()
         {
             _textPanels = new List<Text>();
-            _textPanels.AddRange(GetComponentsInChildren<Text>());
-
+            //_textPanels.AddRange(GetComponentsInChildren<Text>());
+			var k = GetComponentsInChildren<Text> ();
+			_textPanels.AddRange (k);
             _target = GameManager.Instance.CharacterManager.SelectedCharacter;
         }
 
@@ -29,7 +30,7 @@ namespace Assets.Scripts.Panels
             _textPanels.Find(x => x.gameObject.name.Equals("TxtLevel")).text = "Level: " + _target.Level.ToString();
             _textPanels.Find(x => x.gameObject.name.Equals("TxtATK")).text = "ATK: " + _target.Attack.ToString();
             _textPanels.Find(x => x.gameObject.name.Equals("TxtDef")).text = "DEF: " + _target.Defence.ToString();
-            _textPanels.Find(x => x.gameObject.name.Equals("TxtMovSpeed")).text = "Movement speed: " + _target.MovementSpeed.ToString();        
+			_textPanels.Find (x => x.gameObject.name.Equals ("TxtMovSpeed")).text = "Movement speed: " + _target.MovementSpeed.ToString ();
         }
 
         public void SwitchPlayer()
