@@ -59,11 +59,13 @@
      <Compile Include="Assets\Scripts\Items\Staff.cs" />
      <Compile Include="Assets\Scripts\Items\Sword.cs" />
      <Compile Include="Assets\Scripts\Items\Weapon.cs" />
+     <Compile Include="Assets\Scripts\Loot.cs" />
      <Compile Include="Assets\Scripts\Managers\BulletManager.cs" />
      <Compile Include="Assets\Scripts\Managers\CameraManager.cs" />
      <Compile Include="Assets\Scripts\Managers\CharacterManager.cs" />
      <Compile Include="Assets\Scripts\Managers\GameManager.cs" />
      <Compile Include="Assets\Scripts\Managers\UIManager.cs" />
+     <Compile Include="Assets\Scripts\MoveTextUpwards.cs" />
      <Compile Include="Assets\Scripts\Panels\CharacterPanel.cs" />
      <Compile Include="Assets\Scripts\Panels\EvermorePanel.cs" />
      <Compile Include="Assets\Scripts\Panels\InventoryPanel.cs" />
