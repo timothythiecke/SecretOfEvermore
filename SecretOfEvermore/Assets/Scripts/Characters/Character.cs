@@ -28,6 +28,12 @@ public class Character
         private set { _HP = value; }
     }
 
+	public int MaxHP
+	{
+		get;
+		private set;
+	}
+
     public int MP
     {
         get { return _MP; }
@@ -69,7 +75,7 @@ public class Character
     public Character(string name, int hp = 10, int mp = 10, int level = 1, int attack = 1, int defence = 0, float movementSpeed = 5F)
     {
         Name = name;
-        HP = hp;
+        MaxHP = HP = hp;
         MP = mp;
         Level = level;
         Attack = attack;

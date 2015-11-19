@@ -26,12 +26,20 @@ namespace Assets.Scripts.Panels
             _textPanels.Find(x => x.gameObject.name.Equals("TxtPlayerName")).text = _target.Name + ", the " + _target.GetType().ToString();
             _textPanels.Find(x => x.gameObject.name.Equals("TxtHP")).text = "HP: " + _target.HP.ToString();
             _textPanels.Find(x => x.gameObject.name.Equals("TxtMP")).text = "MP: " + _target.MP.ToString();
-            //_textPanels.Find(x => x.gameObject.name.Equals("TxtWeapon")).text = _target.Weapon.ToString();
             _textPanels.Find(x => x.gameObject.name.Equals("TxtLevel")).text = "Level: " + _target.Level.ToString();
             _textPanels.Find(x => x.gameObject.name.Equals("TxtATK")).text = "ATK: " + _target.Attack.ToString();
             _textPanels.Find(x => x.gameObject.name.Equals("TxtDef")).text = "DEF: " + _target.Defence.ToString();
 			_textPanels.Find (x => x.gameObject.name.Equals ("TxtMovSpeed")).text = "Movement speed: " + _target.MovementSpeed.ToString ();
-        }
+
+			var text = _textPanels.Find (x => x.gameObject.name.Equals ("TxtWeapon"));
+			if (_target.Weapon == null) 
+			{
+				text.text = "Weapon: Bearhands";
+			} 
+			else
+				text.text = "Weapon: " + _target.Weapon.ToString ();
+
+      	}
 
         public void SwitchPlayer()
         {
