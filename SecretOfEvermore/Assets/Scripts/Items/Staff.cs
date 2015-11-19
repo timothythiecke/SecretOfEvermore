@@ -8,10 +8,11 @@ namespace Assets.Scripts.Items
 {
     public class Staff : Weapon
     {
-        public override void PerformAction()
+        public override void PerformAction(Character character)
         {
             // Heal player
             Debug.Log("Heal!");
+            character.Heal();
         }
 
         public override string ToString()

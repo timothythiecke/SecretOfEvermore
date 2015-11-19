@@ -22,10 +22,12 @@ public class InventoryPanelItem : MonoBehaviour {
 
 			else if (item.tag.Equals("InventoryName"))
 			{
-				if((linkedItem as Bow) != null) item.text = "Bow";
+				/*if((linkedItem as Bow) != null) item.text = "Bow";
 				else if((linkedItem as Sword) != null) item.text = "Sword";
 				else if((linkedItem as Staff) != null) item.text = "Staff";
-				else if((linkedItem as Armor) != null) item.text = "Armor";
+				else if((linkedItem as Armor) != null) item.text = "Armor";*/
+
+                item.text = linkedItem.ToString();
 			}
 		}
 	}

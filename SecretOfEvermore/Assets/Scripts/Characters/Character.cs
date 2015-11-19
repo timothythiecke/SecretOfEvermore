@@ -112,11 +112,22 @@ public class Character
 
     public void UseWeapon()
     {
-        if (Weapon != null) Weapon.PerformAction();
+        if (Weapon != null) Weapon.PerformAction(this);
     }
 
     public void SetCurrentWeapon(Weapon current)
     {
         Weapon = current;
     }
+
+    public void Heal()
+    {
+        HP += 2;
+        if (HP > MaxHP)
+        {
+            HP = MaxHP;
+        }
+    }
+
+
 }

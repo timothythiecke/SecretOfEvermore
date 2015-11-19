@@ -8,12 +8,14 @@ namespace Assets.Scripts.Items
 {
     public class Sword : Weapon
     {
-        public override void PerformAction()
+        public override void PerformAction(Character character)
         {
             // Increase attack of player
             // Melee attack
 
             Debug.Log("Slash!");
+            /*Physics.SphereCast()
+            GameManager.Instance.FindVisualCharacter(character)*/
         }
 
         public override string ToString()

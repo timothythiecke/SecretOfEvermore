@@ -3,7 +3,7 @@ using System.Collections;
 
 public abstract class Weapon : Item {
 
-    public virtual void PerformAction()
+    public virtual void PerformAction(Character character)
     { 
         
     }

@@ -8,11 +8,15 @@ namespace Assets.Scripts.Items
 {
     public class Bow : Weapon
     {
-        public override void PerformAction()
+        public override void PerformAction(Character character)
         {
-            // Increase attack of player
-            // Ranged attack
             Debug.Log("Noscope!");
+
+			// Get forward vector,
+			// Notify gameManager that a bullet should be spawned
+			// If we 
+
+			// I need MonoBehaviour for this :/
         }
 
         public override string ToString()
