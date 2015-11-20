@@ -10,24 +10,14 @@ public class CollisionHandlingProjectile : MonoBehaviour {
 
     void OnCollisionEnter(Collision collision)
     {
-        /*if (collision.gameObject.tag.Equals("Enemy"))
-        {
-            // Hurt enemy
-            collision.gameObject.GetComponent<EnemyStats>().ReceiveDamage(Damage);
-        }
+        var visChar = collision.gameObject.GetComponent<VisualCharacter>();
 
-        else if (collision.gameObject.tag.Equals("Civilian"))
-        {
-            // Hurt civilian
-            collision.gameObject.GetComponent<CivilianStats>().ReceiveDamage(Damage);
-        }
-
-        else if (collision.gameObject.tag.Equals("Player"))
-        {
-            // Hurt player
-            collision.gameObject.GetComponent<PlayerStats>().ReceiveDamage(Damage);
-        }*/
-
+        if (visChar != null)
+	    {
+            GameManager.Instance.SpawnText(collision.gameObject.transform.position, visChar.Character.Attack.ToString(), Color.red);
+            GameManager.Instance.CharacterManager.HurtCharacter(visChar.Character);
+	    }
+        
         Destroy(gameObject);
     }
 }

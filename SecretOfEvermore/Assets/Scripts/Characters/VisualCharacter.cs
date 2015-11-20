@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 [RequireComponent(typeof(CharacterController))]
@@ -48,5 +49,24 @@ public class VisualCharacter : MonoBehaviour {
             GetComponent<Renderer>().material.color = new Color(1F, 0F, 0F);
             gameObject.layer = 11;
         }
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        var visChar = other.gameObject.GetComponent<VisualCharacter>();
+        if (visChar)
+	    {
+		    var character = visChar.Character;
+            if (character != null)
+            {
+                if (character is Enemy)
+                {
+                    GameManager.Instance.CharacterManager.HurtCharacter(character);
+                    GameManager.Instance.SpawnText(other.transform.position, Character.Attack.ToString(), Color.red);
+                }
+            }
+	    }
+
+        
     }
 }

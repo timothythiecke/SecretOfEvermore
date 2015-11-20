@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
     private BulletManager _bulletManager;
     private Object _visualCharacterPrefab;
     private Object _projectilePrefab;
+    private Object _textPrefab;
     private Inventory _inventory;
     private List<VisualCharacter> _visCharacters;
 
@@ -76,6 +77,7 @@ public class GameManager : MonoBehaviour
         // Load prefabs from memory
         _visualCharacterPrefab = Resources.Load("VisualCharacter");
         _projectilePrefab = Resources.Load("ProjectilePlayer");
+        _textPrefab = Resources.Load("TextPrefab");
 
         // Builders
         BuildCharacters();
@@ -127,10 +129,10 @@ public class GameManager : MonoBehaviour
         (Instantiate(_visualCharacterPrefab, new Vector3(1, 1, 0), new Quaternion()) as GameObject).GetComponent<VisualCharacter>().Character = _characterManager.Dog;
 
         // Do same for list enemies...
-        /*foreach (var item in _characterManager.Enemies)
+        foreach (var item in _characterManager.Enemies)
         {
-            
-        }*/
+            (Instantiate(_visualCharacterPrefab, new Vector3(Random.Range(-50F, 50F), 1, Random.Range(-50F, 50F)), new Quaternion()) as GameObject).GetComponent<VisualCharacter>().Character = item;
+        }
     }
 
     private void BuildUI()
@@ -164,7 +166,27 @@ public class GameManager : MonoBehaviour
     }
 
     public void SwordAttack(Character character)
-    { 
-        
+    {
+        var col = FindVisualCharacter(character).GetComponent<SphereCollider>();
+        col.enabled = true;
+        StartCoroutine(DisableCollider(col));
+    }
+
+    private IEnumerator DisableCollider(SphereCollider col)
+    {
+        yield return new WaitForFixedUpdate();
+        col.enabled = false;
+    }
+
+    public void DestroyVisualCharacter(Character character)
+    {
+        Destroy(FindVisualCharacter(character).gameObject);
+    }
+
+    public void SpawnText(Vector3 origin, string text, Color color)
+    {
+        var textMesh = (Instantiate(_textPrefab, origin + new Vector3(0, 2F, 0), new Quaternion()) as GameObject).GetComponent<TextMesh>();
+        textMesh.text = text;
+        textMesh.color = color;        
     }
 }

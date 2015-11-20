@@ -38,6 +38,7 @@ public class Loot : MonoBehaviour {
             {
                 // Pickup & destroy
                 (Instantiate(Resources.Load("TextPrefab"), transform.position + new Vector3(0, 2.5f, 0), new Quaternion()) as GameObject).GetComponent<TextMesh>().text = _lootItem.ToString() + " looted!";
+                _lootItem.IncreaseStat(other.GetComponent<VisualCharacter>().Character);
                 GameManager.Instance.Inventory.AddToInventory(_lootItem);
                 Destroy(gameObject);
             }

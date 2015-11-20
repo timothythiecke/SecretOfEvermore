@@ -157,4 +157,15 @@ public abstract class Character
         Attack += amount;
     }
 
+    public bool ReceiveDamage(int amount)
+    {
+        HP -= amount;
+
+        if (HP <= 0)
+        {
+            return true;
+        }
+
+        return false;
+    }
 }

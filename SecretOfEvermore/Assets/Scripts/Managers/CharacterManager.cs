@@ -43,12 +43,36 @@ public class CharacterManager
     // Ctor & Methods //
     public CharacterManager()
     {
-        _human = new Human("Bobby"); // * human
-        _dog = new Dog("Billy"); // * dog
+        _human = new Human("Bobby");
+        _dog = new Dog("Billy");
 
         SelectedCharacter = _human;
 
-        _enemies = new List<Enemy>(); // enemy
+        _enemies = new List<Enemy>();
+        _enemies.Add(new Enemy("Steve"));
+        _enemies.Add(new Enemy("Steve"));
+        _enemies.Add(new Enemy("Steve"));
+        _enemies.Add(new Enemy("Steve"));
+        _enemies.Add(new Enemy("Steve"));
+        _enemies.Add(new Enemy("Steve"));
+        _enemies.Add(new Enemy("Steve"));
+        _enemies.Add(new Enemy("Steve"));
+        _enemies.Add(new Enemy("Steve"));
+        _enemies.Add(new Enemy("Steve"));
+        _enemies.Add(new Enemy("Steve"));
+        _enemies.Add(new Enemy("Steve"));
+        _enemies.Add(new Enemy("Steve"));
+        _enemies.Add(new Enemy("Steve"));
+        _enemies.Add(new Enemy("Steve"));
+        _enemies.Add(new Enemy("Steve"));
+        _enemies.Add(new Enemy("Steve"));
+        _enemies.Add(new Enemy("Steve"));
+        _enemies.Add(new Enemy("Steve"));
+        _enemies.Add(new Enemy("Steve"));
+        _enemies.Add(new Enemy("Steve"));
+        _enemies.Add(new Enemy("Steve"));
+        _enemies.Add(new Enemy("Steve"));
+        _enemies.Add(new Enemy("Steve"));
     }
 
     // Toggle between the human and the dog
@@ -93,6 +117,14 @@ public class CharacterManager
         Vector3 dir = GameManager.Instance.FindMainCharacter().transform.position - slaveVisChar.transform.position;
         if (dir.sqrMagnitude > 9)
             slaveVisChar.CharacterController.Move(dir.normalized * slave.MovementSpeed * Time.deltaTime);
+    }
+
+    public void HurtCharacter(Character character)
+    {
+        if (character.ReceiveDamage(2))
+        {
+            GameManager.Instance.DestroyVisualCharacter(character);
+        }
     }
 
 }

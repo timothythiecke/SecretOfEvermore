@@ -10,12 +10,7 @@ namespace Assets.Scripts.Items
     {
         public override void PerformAction(Character character)
         {
-            // Increase attack of player
-            // Melee attack
-
-            Debug.Log("Slash!");
-            /*Physics.SphereCast()
-            GameManager.Instance.FindVisualCharacter(character)*/
+            GameManager.Instance.SwordAttack(character);
         }
 
         public override string ToString()
