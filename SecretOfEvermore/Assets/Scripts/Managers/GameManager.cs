@@ -84,6 +84,7 @@ public class GameManager : MonoBehaviour
         // Fetch all visual characters from the scene
         _visCharacters = new List<VisualCharacter>();
         _visCharacters.AddRange(GameObject.FindObjectsOfType<VisualCharacter>());
+        foreach (var item in _visCharacters) item.RefreshMaterial();
 
 
         // Other stuff
