@@ -50,6 +50,7 @@
      <Compile Include="Assets\Scripts\Characters\Enemy.cs" />
      <Compile Include="Assets\Scripts\Characters\Human.cs" />
      <Compile Include="Assets\Scripts\Characters\VisualCharacter.cs" />
+     <Compile Include="Assets\Scripts\CollisionHandlingProjectile.cs" />
      <Compile Include="Assets\Scripts\EndGame.cs" />
      <Compile Include="Assets\Scripts\HUD.cs" />
      <Compile Include="Assets\Scripts\Items\Armor.cs" />

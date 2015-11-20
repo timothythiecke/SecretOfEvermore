@@ -25,4 +25,9 @@ public class Armor : Item {
     {
         return "Armor";
     }
+
+    public override void IncreaseStat(Character character)
+    {
+        character.IncreaseDefence(2);
+    }
 }

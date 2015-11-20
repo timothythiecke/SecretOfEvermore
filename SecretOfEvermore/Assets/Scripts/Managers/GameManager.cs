@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
     private UIManager _UIManager;
     private BulletManager _bulletManager;
     private Object _visualCharacterPrefab;
+    private Object _projectilePrefab;
     private Inventory _inventory;
     private List<VisualCharacter> _visCharacters;
 
@@ -74,6 +75,7 @@ public class GameManager : MonoBehaviour
 
         // Load prefabs from memory
         _visualCharacterPrefab = Resources.Load("VisualCharacter");
+        _projectilePrefab = Resources.Load("ProjectilePlayer");
 
         // Builders
         BuildCharacters();
@@ -84,11 +86,14 @@ public class GameManager : MonoBehaviour
         // Fetch all visual characters from the scene
         _visCharacters = new List<VisualCharacter>();
         _visCharacters.AddRange(GameObject.FindObjectsOfType<VisualCharacter>());
-        foreach (var item in _visCharacters) item.RefreshMaterial();
+        foreach (var item in _visCharacters) item.LateInitialize();
 
 
         // Other stuff
         _characterManager.Human.SetCurrentWeapon(_inventory.CurrentWeapon);
+
+        // Physics stuff
+        Physics.IgnoreLayerCollision(8, 9); // Ignore collision between player and their own bullets
     }
 
     void Update()
@@ -150,5 +155,16 @@ public class GameManager : MonoBehaviour
     public VisualCharacter FindMainCharacter()
     {
         return _visCharacters.Find(x => x.Character.Equals(CharacterManager.SelectedCharacter));
+    }
+
+    public void FireBow(Character character)
+    {
+        var instance = Instantiate(_projectilePrefab, FindVisualCharacter(character).transform.position, new Quaternion());
+        (instance as GameObject).GetComponent<Rigidbody>().AddForce(character.Forward * 10, ForceMode.Impulse);
+    }
+
+    public void SwordAttack(Character character)
+    { 
+        
     }
 }

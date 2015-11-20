@@ -30,10 +30,23 @@ public class VisualCharacter : MonoBehaviour {
         CharacterController = GetComponent<CharacterController>();
     }
 
-    public void RefreshMaterial()
+    public void LateInitialize()
     {
-        if (Character is Human) GetComponent<Renderer>().material.color = new Color(76 / 255F, 208/255F, 0F);
-        else if (Character is Dog) GetComponent<Renderer>().material.color = new Color(208 / 255F, 111 / 255F, 0);
-        else if (Character is Enemy) GetComponent<Renderer>().material.color = new Color(1F, 0F, 0F);
+        if (Character is Human)
+        {
+            GetComponent<Renderer>().material.color = new Color(76 / 255F, 208 / 255F, 0F);
+            gameObject.layer = 9;
+        }
+        else if (Character is Dog)
+        {
+            GetComponent<Renderer>().material.color = new Color(208 / 255F, 111 / 255F, 0);
+            gameObject.layer = 9;
+        }
+
+        else if (Character is Enemy)
+        {
+            GetComponent<Renderer>().material.color = new Color(1F, 0F, 0F);
+            gameObject.layer = 11;
+        }
     }
 }

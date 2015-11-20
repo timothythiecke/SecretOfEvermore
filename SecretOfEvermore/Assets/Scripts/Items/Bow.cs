@@ -10,14 +10,17 @@ namespace Assets.Scripts.Items
     {
         public override void PerformAction(Character character)
         {
-            Debug.Log("Noscope!");
-
-			//GameManager.Instance.BulletManager.Shoot()
+            GameManager.Instance.FireBow(character);
         }
 
         public override string ToString()
         {
             return "Bow";
+        }
+
+        public override void IncreaseStat(Character character)
+        {
+            character.IncreaseDamage(2);
         }
     }
 }

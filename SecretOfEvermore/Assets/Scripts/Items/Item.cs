@@ -13,4 +13,9 @@ public abstract class Item {
 
     public int Amount
     { get; set; }
+
+    public virtual void IncreaseStat(Character character)
+    { 
+    
+    }
 }

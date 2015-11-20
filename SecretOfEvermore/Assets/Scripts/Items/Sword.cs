@@ -22,5 +22,10 @@ namespace Assets.Scripts.Items
         {
             return "Sword";
         }
+
+        public override void IncreaseStat(Character character)
+        {
+            character.IncreaseDamage(5);
+        }
     }
 }

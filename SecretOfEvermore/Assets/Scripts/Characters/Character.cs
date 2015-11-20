@@ -13,6 +13,8 @@ public abstract class Character
     private int _attack;
     private int _defence;
     private float _movSpeed;
+    private bool _updateForwardVector = false;
+    private Vector3 _forwardVector;
 
 
     // Properties //
@@ -70,6 +72,12 @@ public abstract class Character
         private set {_weapon = value;}
     }
 
+    public Vector3 Forward
+    {
+        get { return _forwardVector; }
+        private set { _forwardVector = value; }
+    }
+
 
     // Ctor & Methods //
     public Character(string name, int hp = 10, int mp = 10, int level = 1, int attack = 1, int defence = 0, float movementSpeed = 5F)
@@ -86,25 +94,35 @@ public abstract class Character
     public Vector3 CalculateMoveDirection()
     {
         var movementDir = new Vector3();
+        _updateForwardVector = false;
 
         if (Input.GetKey(KeyCode.UpArrow))
         {
             movementDir.z = 1F;
+            _updateForwardVector = true;
         }
 
         else if (Input.GetKey(KeyCode.DownArrow))
         {
             movementDir.z = -1F;
+            _updateForwardVector = true;
         }
 
         if (Input.GetKey(KeyCode.LeftArrow))
         {
             movementDir.x = -1F;
+            _updateForwardVector = true;
         }
 
         else if (Input.GetKey(KeyCode.RightArrow))
         {
             movementDir.x = 1F;
+            _updateForwardVector = true;
+        }
+
+        if (_updateForwardVector) // Elapsed time for button check should be way lower
+        {
+            _forwardVector = movementDir;
         }
 
         return movementDir;
@@ -129,5 +147,14 @@ public abstract class Character
         }
     }
 
+    public void IncreaseDefence(int amount)
+    {
+        Defence += amount;
+    }
+
+    public void IncreaseDamage(int amount)
+    {
+        Attack += amount;
+    }
 
 }
